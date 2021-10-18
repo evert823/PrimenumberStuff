@@ -7,6 +7,7 @@ PrintNextPrime helps you find the first next prime number from an entered value.
 
 Example:
 
+```
 PS C:\Users\Evert Jan\pythonprojects\primes> ..\pypy3.7-v7.3.5-win64\pypy3 PrintNextPrime.py
 From what size do you want found factors to be displayed? --> 200
                                     ----+----0----+----0----+----0----+----0
@@ -22,3 +23,4 @@ Type your candidate number here --> 83645635241525364653
 18/10/2021 20:54:19
                                     ----+----0----+----0----+----0----+----0
 Type your candidate number here -->
+```
