@@ -1,7 +1,7 @@
 # PrimenumberStuff
 factorfinder.py tests if a number is prime.
 
-PrintTransPrimeList.py identifies lists of n n-digit primes, in which you can transpose the digits resulting into another list of n n-digits primes.
+PrintTransPrimeList.py identifies lists of n n-digit primes, in which you can transpose the digits resulting into another list of n n-digits primes [(see here)(https://mathforums.com/threads/list-of-prime-numbers-and-after-transposing-all-digits-its-again-a-list-of-prime-numbers.360593/)].
 
 PrintNextPrime helps you find the first next prime number from an entered value.
 
