@@ -24,3 +24,32 @@ Type your candidate number here --> 83645635241525364653
                                     ----+----0----+----0----+----0----+----0
 Type your candidate number here -->
 ```
+
+
+TransPrimeListBatch follows a faster method, suggested by [billymac00](https://mathforums.com/members/billymac00.1949/), for transposable n-digit prime lists.
+Example:
+```
+PS C:\Users\Evert Jan\pythonprojects\primes> cat TransPrimeListBatchInput.txt
+11
+PS C:\Users\Evert Jan\pythonprojects\primes> cat TransPrimeListBatch.ps1
+..\pypy3.7-v7.3.5-win64\pypy3 TransPrimeListBatch.py
+PS C:\Users\Evert Jan\pythonprojects\primes> .\TransPrimeListBatch.ps1
+19,51
+19,79
+19,111
+19,139
+19,147
+Found one !!
+36827624653
+79523446741
+23856965107
+81894264047
+51759205241
+86567550449
+29691486431
+37639410019
+52954900147
+96064841179
+93377373317
+----
+```
