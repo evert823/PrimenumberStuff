@@ -1,69 +1,94 @@
 from factorfinder import factorfinder
 import random
 
-def PrintList(pnumberlength, i):
+def PrintList(pnumberlength):
     global file2
-    for j in range(0, len(i)):
-        file2.write(str(i[j]) + "\n")
+    for j in range(0, pnumberlength):
+        file2.write(str(i_hor[j]).zfill(pnumberlength) + "\n")
+        print(str(i_hor[j]).zfill(pnumberlength))
+    file2.write("----\n")
+    print("----")
 
+def LegalFirst(pnumber, pnumberlength):
+    s = str(pnumber).zfill(pnumberlength)
+    if s.find("0") > -1:
+        return False
+    else:
+        return True
 
-def IsTransPrimeList(pnumberlength, i):
-    global AttemptCounter
-    
+def Derive_i_ver(pnumberlength):
+    global i_hor
+    global i_ver
+
     s = []
     cs = []
-    ci = []
 
     for j in range(0, pnumberlength):
         s.append("")
         cs.append("")
-        ci.append(0)
-    for j in range(0, len(i)):
-        s[j] = str(i[j])
-    
-    if s[0].find("0") > -1:
-        return False
-    es = s[len(i) - 1]
-    if es.find("0") > -1 or es.find("2") > -1 or es.find("4") > -1 or es.find("5") > -1 or es.find("6") > -1 or es.find("8") > -1:
-        return False
-    
-    AttemptCounter += 1
-    if AttemptCounter % 10 == 0:
-        file3 = open("TransPrimeListBatchOutput.log", 'a')
-        file3.write(str(AttemptCounter) + " attempts\n")
-        file3.close()
 
-    for j1 in range(0, len(i)):
+    for j in range(0, pnumberlength):
+        s[j] = str(i_hor[j]).zfill(pnumberlength)
+
+    for j1 in range(0, pnumberlength):
         cs[j1] = ""
-        for j2 in range(0, len(i)):
+        for j2 in range(0, pnumberlength):
             cs[j1] = cs[j1] + s[j2][j1]
     
-    for j in range(0, len(i)):
-        ci[j] = int(cs[j])
-    
-    for j in range(0, len(i)):
-        if myfactorfinder.IsPrime(ci[j]) == False:
-            return False
-
-    return True
-
+    for j in range(0, pnumberlength):
+        i_ver[j] = int(cs[j])
 
 def OneRandomTransPrimeList(pnumberlength):
-    i = []
-    for j in range(0, pnumberlength):
-        i.append(0)
+    global i_hor
+    global i_ver
 
-    TransPrimeListFound = False
-    while TransPrimeListFound == False:
-        for j in range(0, len(i)):
-            i[j] = 1
-            while myfactorfinder.IsPrime(i[j]) == False:
-                i[j] = random.randint(n_start, n_end + 1)
+
+    for j in range(0, pnumberlength - 4):
+        n = n_start
+
+        while not ((j > 0 or LegalFirst(n, pnumberlength) == True) and myfactorfinder.IsPrime(n) == True):
+            n = random.randint(n_start, n_end + 1)
         
-        TransPrimeListFound = IsTransPrimeList(pnumberlength, i)
+        i_hor[j] = n
 
-    if TransPrimeListFound == True:
-        PrintList(pnumberlength, i)
+    Derive_i_ver(pnumberlength)
+
+    for j in range(0, pnumberlength - 4):
+        n = i_ver[j]
+        while not ((j > 0 or LegalFirst(n, pnumberlength) == True) and myfactorfinder.IsPrime(n) == True):
+            n = random.randint(i_ver[j], i_ver[j] + (10 ** 4))
+
+        for j2 in range(pnumberlength - 4, pnumberlength):
+            s = str(n).zfill(pnumberlength)
+            myd = int(s[j2])
+            i_hor[j2] = i_hor[j2] + (myd * (10 ** (pnumberlength - (j + 1))))
+
+
+    for i1 in range(1, 10000):
+        if myfactorfinder.IsPrime(i_hor[pnumberlength - 4] + i1) == True:
+            for i2 in range(1, 10000):
+                if myfactorfinder.IsPrime(i_hor[pnumberlength - 3] + i2) == True:
+                    print(str(i1) + "," + str(i2))
+                    for i3 in range(1, 10000):
+                        if myfactorfinder.IsPrime(i_hor[pnumberlength - 2] + i3) == True:
+                            for i4 in range(0, 10000):
+                                if myfactorfinder.IsPrime(i_hor[pnumberlength - 1] + i4) == True:
+                                    i_hor[pnumberlength - 4] += i1
+                                    i_hor[pnumberlength - 3] += i2
+                                    i_hor[pnumberlength - 2] += i3
+                                    i_hor[pnumberlength - 1] += i4
+                                    Derive_i_ver(pnumberlength)
+                                    if (myfactorfinder.IsPrime(i_ver[pnumberlength - 4]) == True and
+                                        myfactorfinder.IsPrime(i_ver[pnumberlength - 3]) == True and
+                                        myfactorfinder.IsPrime(i_ver[pnumberlength - 2]) == True and
+                                        myfactorfinder.IsPrime(i_ver[pnumberlength - 1]) == True):
+                                        print("Found one !!")
+                                        PrintList(pnumberlength)
+                                    i_hor[pnumberlength - 4] -= i1
+                                    i_hor[pnumberlength - 3] -= i2
+                                    i_hor[pnumberlength - 2] -= i3
+                                    i_hor[pnumberlength - 1] -= i4
+    
 
 
 global file2
@@ -78,6 +103,12 @@ Lines = file1.readlines()
 file1.close()
 
 mynumberlength = int(Lines[0])
+
+i_hor = []
+i_ver = []
+for j in range(0, mynumberlength):
+    i_hor.append(0)
+    i_ver.append(0)
 
 n_start = 10 ** (mynumberlength - 1)
 n_end = (10 ** mynumberlength) - 1
