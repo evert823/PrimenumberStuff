@@ -1,13 +1,20 @@
+from datetime import datetime
 from factorfinder import factorfinder
 import random
+
+def DateTime4Log():
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    del now
+    return dt_string
 
 def PrintList(pnumberlength):
     global file2
     for j in range(0, pnumberlength):
         file2.write(str(i_hor[j]).zfill(pnumberlength) + "\n")
         print(str(i_hor[j]).zfill(pnumberlength))
-    file2.write("----\n")
-    print("----")
+    file2.write("---- " + DateTime4Log() + " ----\n")
+    print("---- " + DateTime4Log() + " ----")
 
 def LegalFirst(pnumber, pnumberlength):
     s = str(pnumber).zfill(pnumberlength)
@@ -68,7 +75,7 @@ def OneRandomTransPrimeList(pnumberlength):
         if myfactorfinder.IsPrime(i_hor[pnumberlength - 4] + i1) == True:
             for i2 in range(1, 10000):
                 if myfactorfinder.IsPrime(i_hor[pnumberlength - 3] + i2) == True:
-                    print(str(i1) + "," + str(i2))
+                    print(str(i1) + "," + str(i2) + "," + DateTime4Log())
                     for i3 in range(1, 10000):
                         if myfactorfinder.IsPrime(i_hor[pnumberlength - 2] + i3) == True:
                             for i4 in range(0, 10000):
