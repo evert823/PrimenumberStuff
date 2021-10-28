@@ -31,11 +31,6 @@ class int_in_base():
         return n
     
     def convert_otherbase(self, potherbase):
-        if type(potherbase) != int:
-            raise Exception("An integer was expected.")
-        if potherbase < 2:
-            raise Exception("An integer >= 2 was expected.")
-
         result = int_in_base(potherbase)
         result.digit.clear()
 
