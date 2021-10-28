@@ -36,10 +36,6 @@ class int_in_base():
 
         n = self.decimal_value()
 
-        if n == 0:
-            result.digit.append(0)
-            return result
-        
         nd = 0
         while potherbase ** (nd + 1) <= n:
             nd += 1
