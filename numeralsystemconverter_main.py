@@ -14,6 +14,6 @@ a.set_digits(4, 19, 28, 1, 13, 7)
 # The decimal_value method specifically converts to decimal system
 print(str(a.decimal_value())) # expected output 96167052
 
-# The convert_otherbase method returns another int_in_base object instance, having the same value in the new base
+# The convert_to_otherbase method returns another int_in_base object instance, having the same value in the new base
 b = a.convert_to_otherbase(31)
 print(b.digit) # expected output [3, 11, 4, 1, 23, 30]

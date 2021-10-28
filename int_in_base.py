@@ -1,6 +1,6 @@
 # This class represents a number expressed as the digits in it's own base
 # e.g. having base 2, digits [1, 0, 0, 1] it will display decimal_value() as 9
-# Use convert_otherbase(...) to get the digits in the other base
+# Use convert_to_otherbase(...) to get the digits in the other base
 class int_in_base():
     def __init__(self, pbase):
         if type(pbase) != int:
