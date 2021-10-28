@@ -50,3 +50,24 @@ class int_in_base():
         
         return result
 
+    def set_digits_from_base_10(self, pvalue):
+        if type(pvalue) != int:
+            raise Exception("An integer was expected.")
+        if pvalue < 0:
+            raise Exception("An integer >= 0 was expected.")
+
+        n = pvalue
+
+        self.digit.clear()
+
+        nd = 0
+        while self.base ** (nd + 1) <= n:
+            nd += 1
+
+        j = 0
+
+        while j <= nd:
+            k = n // (self.base ** (nd - j))
+            self.digit.append(k)
+            n -= k * (self.base ** (nd - j))
+            j += 1

@@ -17,3 +17,7 @@ print(str(a.decimal_value())) # expected output 96167052
 # The convert_to_otherbase method returns another int_in_base object instance, having the same value in the new base
 b = a.convert_to_otherbase(31)
 print(b.digit) # expected output [3, 11, 4, 1, 23, 30]
+
+# set_digits_from_base_10 is used to assign a value directly from a 10-based number
+a.set_digits_from_base_10(96167052)
+print(a.digit) # expected output [4, 19, 28, 1, 13, 7]
