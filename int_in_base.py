@@ -30,7 +30,7 @@ class int_in_base():
             n += self.digit[i] * (self.base ** (nd - (i + 1)))
         return n
     
-    def convert_otherbase(self, potherbase):
+    def convert_to_otherbase(self, potherbase):
         result = int_in_base(potherbase)
         result.digit.clear()
 
