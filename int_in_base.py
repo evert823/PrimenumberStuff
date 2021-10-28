@@ -10,6 +10,18 @@ class int_in_base():
         self.base = pbase
         self.digit = [0]
 
+    def set_base(self, pbase):
+        self.__init__(pbase)
+
+    def set_digits(self, *digits):
+        self.digit = []
+        for dg in digits:
+            if type(dg) != int:
+                raise Exception("A list of integers was expected.")
+            if dg > self.base - 1 or dg < 0:
+                raise Exception("Each digit should be >= 0 and <= base - 1.")
+            self.digit.append(dg)
+
     def decimal_value(self):
         nd = len(self.digit)
         n = 0
@@ -47,14 +59,3 @@ class int_in_base():
         
         return result
 
-    def set_base(self, pbase):
-        self.__init__(pbase)
-
-    def set_digits(self, *digits):
-        self.digit = []
-        for dg in digits:
-            if type(dg) != int:
-                raise Exception("A list of integers was expected.")
-            if dg > self.base - 1 or dg < 0:
-                raise Exception("Each digit should be >= 0 and <= base - 1.")
-            self.digit.append(dg)
