@@ -71,3 +71,49 @@ class int_in_base():
             self.digit.append(k)
             n -= k * (self.base ** (nd - j))
             j += 1
+
+    def digitcharmapping(self):
+        return ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b",
+                "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
+                "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", )
+
+    def digitstring(self):
+        if self.base > 36:
+            raise Exception("digitstring method not supported for bases > 36.")
+        
+        dcm = self.digitcharmapping()
+
+        s = ""
+
+        for j in range(0, len(self.digit)):
+            s += dcm[self.digit[j]]
+        
+        del dcm
+
+        return s
+
+    def set_digits_from_digitstring(self, pstring):
+        if self.base > 36:
+            raise Exception("set_digits_from_digitstring method not supported for bases > 36.")
+
+        self.digit.clear()
+
+        dcm = self.digitcharmapping()
+
+        for j in range(0, len(pstring)):
+            a = dcm.index(pstring[j])
+            
+            if a >= self.base:
+                raise Exception("digitstring not eligible for base " + str(self.base))
+
+            self.digit.append(a)
+
+    def flipdigits(self):
+        helpdigit = self.digit.copy()
+        self.digit.clear()
+
+        j = len(helpdigit)
+
+        while j > 0:
+            j -= 1
+            self.digit.append(helpdigit[j])
